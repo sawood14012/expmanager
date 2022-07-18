@@ -1,0 +1,26 @@
+{ "data": [
+        {
+            "name": "DeepCloud",
+            "price": "₹200",
+            "sub": "Fuel",
+            "company": "Deepcloud",
+            "date": "18-07-2022"
+
+        },
+        {
+            "name": "Cloud Adda",
+            "price": "₹200",
+            "sub": "purchase",
+            "company": "Cloud Adda",
+            "date": "18-07-2022"
+
+        },
+        {
+            "name": "DeepCloud",
+            "price": "₹200",
+            "sub": "Fuel",
+            "company": "Deepcloud",
+            "date": "17-07-2022"
+
+        }
+]}

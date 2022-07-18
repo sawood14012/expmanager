@@ -30,7 +30,8 @@ class _HomeState extends ConsumerState<Home> {
 
     final routeIndex = ref.watch(RouteStateProvider);
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      //extendBodyBehindAppBar: true,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0, 
         backgroundColor: Colors.transparent,
@@ -39,6 +40,8 @@ class _HomeState extends ConsumerState<Home> {
         ],
         ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
         currentIndex: routeIndex,
         selectedItemColor: Theme.of(context).primaryColor,
         selectedIconTheme: const IconThemeData(size: 34),
