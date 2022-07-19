@@ -11,9 +11,9 @@ class Primary extends ConsumerStatefulWidget {
 }
 
 var Organizations = [
-  'Item 1',
-  'Item 2',
-  'Item 3',
+  'Deep Cloud',
+  'CloudAdda',
+  'DadsCorp',
 ];
 
 var ExpenseType = ['Travel', 'Fuel', 'Internet', 'Others'];
