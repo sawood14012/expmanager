@@ -19,7 +19,7 @@ class _ProfileState extends ConsumerState<Profile> {
     // ignore: todo
     // TODO: implement build
     return ListView(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(30),
       children: <Widget>[
         Text("Name",
             textAlign: TextAlign.start,
