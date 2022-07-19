@@ -1,6 +1,7 @@
 import 'package:expmanager/switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Primary extends ConsumerStatefulWidget {
   const Primary({Key? key}) : super(key: key);
@@ -29,6 +30,9 @@ class _PrimaryState extends ConsumerState<Primary> {
   late final GlobalKey<FormState> _formKey;
   var invoiceNumberctrl = TextEditingController();
   var amountCtrl = TextEditingController();
+  final ImagePicker _picker = ImagePicker();
+  late final XFile? photo;
+  
 
   @override
   void initState() {
@@ -43,7 +47,23 @@ class _PrimaryState extends ConsumerState<Primary> {
     final CompanyDropDownvalue = ref.watch(CompanyDropDownStateProvider);
     final ExpenseDropDownvalue = ref.watch(ExpenseDropDownStateProvider);
     return Center(
-      child: Form(
+      child: 
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+        const Padding(
+                padding: EdgeInsets.fromLTRB(10, 10, 0, 10),
+                child: Text(
+                  "Home",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Roboto",
+                      fontSize: 30),
+                ),
+              ),
+        Form(
         key: _formKey,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
@@ -197,7 +217,9 @@ class _PrimaryState extends ConsumerState<Primary> {
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18.0),
                                       side: BorderSide.none))),
-                      onPressed: () => {},
+                      onPressed: () async {
+                        photo = await _picker.pickImage(source: ImageSource.camera);
+                      },
                       child: const Icon(
                         Icons.camera_alt_rounded,
                         size: 35,
@@ -241,6 +263,7 @@ class _PrimaryState extends ConsumerState<Primary> {
           ),
         ),
       ),
+      ])
     );
   }
 }
