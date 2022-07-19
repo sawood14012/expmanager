@@ -9,101 +9,238 @@ class Primary extends ConsumerStatefulWidget {
   ConsumerState<Primary> createState() => _PrimaryState();
 }
 
+var Organizations = [
+  'Deep Cloud',
+  'CloudAdda',
+  'DadsCorp',
+];
+
+var ExpenseType = ['Travel', 'Fuel', 'Internet', 'Others'];
+
+final CompanyDropDownStateProvider = StateProvider<String>((ref) {
+  return Organizations[0];
+});
+
+final ExpenseDropDownStateProvider = StateProvider<String>((ref) {
+  return ExpenseType[0];
+});
+
 class _PrimaryState extends ConsumerState<Primary> {
-  final screens = [];
+  late final GlobalKey<FormState> _formKey;
+  var invoiceNumberctrl = TextEditingController();
+  var amountCtrl = TextEditingController();
 
-  final _formKey = GlobalKey<FormState>();
-
-  int _selectedCompany = 0;
-  int _selectedExp = 0;
-  List<DropdownMenuItem<int>> companyList = [];
-  List<DropdownMenuItem<int>> expList = [];
-  void loadCompanyList() {
-    companyList = [];
-    companyList.add(new DropdownMenuItem(
-      child: new Text('Deepcloud'),
-      value: 0,
-    ));
-    companyList.add(new DropdownMenuItem(
-      child: new Text('Dadscorp'),
-      value: 1,
-    ));
-    companyList.add(new DropdownMenuItem(
-      child: new Text('Cloudadda'),
-      value: 2,
-    ));
-  }
-
-  void loadExpList() {
-    expList = [];
-    expList.add(new DropdownMenuItem(
-      child: new Text('fuel'),
-      value: 0,
-    ));
-    expList.add(new DropdownMenuItem(
-      child: new Text('food'),
-      value: 1,
-    ));
-    expList.add(new DropdownMenuItem(
-      child: new Text('Cloudadda'),
-      value: 2,
-    ));
+  @override
+  void initState() {
+    super.initState();
+    _formKey = GlobalKey<FormState>();
   }
 
   @override
   Widget build(BuildContext context) {
-    loadCompanyList();
-    loadExpList();
-    return Form(
+    // ignore: todo
+    // TODO: implement build
+    final CompanyDropDownvalue = ref.watch(CompanyDropDownStateProvider);
+    final ExpenseDropDownvalue = ref.watch(ExpenseDropDownStateProvider);
+    return Center(
+      child: Form(
         key: _formKey,
-        child: new ListView(
-          children: getFormWidget(),
-        ));
-  }
-
-  List<Widget> getFormWidget() {
-    List<Widget> formWidget = [];
-    formWidget.add(Container(
-        height: 50,
-        width: MediaQuery.of(context).size.width,
-        margin: EdgeInsets.all(20),
-        child: DropdownButton(
-          hint: new Text('Select Company'),
-          items: companyList,
-          value: _selectedCompany,
-          onChanged: (value) {
-            setState(() {
-              _selectedCompany = int.parse(value.toString());
-            });
-          },
-          isExpanded: true,
-        )));
-    Padding(
-      padding: EdgeInsets.all(10),
-    );
-
-    formWidget.add(Container(
-         padding: EdgeInsets.symmetric(horizontal: 10.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15.0),
-            border: Border.all(
-                color: Colors.red, style: BorderStyle.solid, width: 0.80),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 10),
+              const Text("Company",
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      fontFamily: 'Montserrat', fontWeight: FontWeight.bold)),
+              const SizedBox(height: 10),
+              Material(
+                elevation: 10.0,
+                borderRadius: BorderRadius.circular(12),
+                child: DropdownButtonFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Company',
+                      hintText: 'Select your Organization',
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      filled: true,
+                      fillColor: Colors.white,
+                      isDense: true, // Reduces height a bit
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none, // No border
+                        borderRadius:
+                            BorderRadius.circular(12), // Apply corner radius
+                      ),
+                    ),
+                    value: CompanyDropDownvalue,
+                    items: Organizations.map((String item) {
+                      return DropdownMenuItem(
+                        value: item,
+                        child: Text(item),
+                      );
+                    }).toList(),
+                    onChanged: (String? value) {
+                      ref.read(CompanyDropDownStateProvider.state).state =
+                          value!;
+                    }),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Text(
+                "Expense Type",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                    fontFamily: 'Montserrat', fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 10),
+              Material(
+                borderRadius: BorderRadius.circular(12),
+                elevation: 10.0,
+                child: DropdownButtonFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Expense Type',
+                      hintText: 'Select your Type of expense',
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      filled: true,
+                      fillColor: Colors.white,
+                      isDense: true, // Reduces height a bit
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none, // No border
+                        borderRadius:
+                            BorderRadius.circular(12), // Apply corner radius
+                      ),
+                    ),
+                    value: ExpenseDropDownvalue,
+                    items: ExpenseType.map((String item) {
+                      return DropdownMenuItem(
+                        value: item,
+                        child: Text(item),
+                      );
+                    }).toList(),
+                    onChanged: (String? value) {
+                      ref.read(ExpenseDropDownStateProvider.state).state =
+                          value!;
+                    }),
+              ),
+              const SizedBox(height: 10),
+              const Text("Invoice Number",
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      fontFamily: 'Montserrat', fontWeight: FontWeight.bold)),
+              const SizedBox(height: 10),
+              Material(
+                  borderRadius: BorderRadius.circular(12),
+                  elevation: 10.0,
+                  child: TextFormField(
+                      controller: invoiceNumberctrl,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        hintText: 'Enter invoice number',
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                        filled: true,
+                        fillColor: Colors.white,
+                        isDense: true, // Reduces height a bit
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none, // No border
+                          borderRadius:
+                              BorderRadius.circular(12), // Apply corner radius
+                        ),
+                      ),
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      })),
+              const SizedBox(height: 10),
+              const Text("₹ Amount",
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      fontFamily: 'Montserrat', fontWeight: FontWeight.bold)),
+              const SizedBox(height: 10),
+              Material(
+                  borderRadius: BorderRadius.circular(12),
+                  elevation: 10.0,
+                  child: TextFormField(
+                      controller: amountCtrl,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        hintText: 'Enter Amount in ₹',
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                        filled: true,
+                        fillColor: Colors.white,
+                        isDense: true, // Reduces height a bit
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none, // No border
+                          borderRadius:
+                              BorderRadius.circular(12), // Apply corner radius
+                        ),
+                      ),
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some amount';
+                        }
+                        return null;
+                      })),
+              const SizedBox(height: 10),
+              Center(
+                child: SizedBox(
+                    width: MediaQuery.of(context).size.width *
+                        0.5, // <-- match_parent
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          elevation: MaterialStateProperty.all<double>(10.0),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      side: BorderSide.none))),
+                      onPressed: () => {},
+                      child: const Icon(
+                        Icons.camera_alt_rounded,
+                        size: 35,
+                      ),
+                    )),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width *
+                        0.3, // <-- match_parent
+                    child:
+                  ElevatedButton(
+                    style: ButtonStyle(
+                        elevation: MaterialStateProperty.all<double>(10.0),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    side: BorderSide.none))),
+                    onPressed: () => {},
+                    child: const Text("Submit"),
+                  )),
+                  const Spacer(),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                        elevation: MaterialStateProperty.all<double>(10.0),
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    side: BorderSide(color: Theme.of(context).primaryColor)))),
+                    onPressed: () => {},
+                    child: Text("Cancel", style: TextStyle(color: Theme.of(context).primaryColor),),
+                  )
+                ],
+              )
+            ],
           ),
-        child: new DropdownButton(
-
-          borderRadius: BorderRadius.circular(5),
-          menuMaxHeight: 500.0,
-          hint: new Text('Select Type of Expense'),
-          elevation: 0,
-          items: expList,
-          value: _selectedExp,
-          onChanged: (value) {
-            setState(() {
-              _selectedExp = int.parse(value.toString());
-            });
-          },
-          isExpanded: true,
-        )));
-    return formWidget;
+        ),
+      ),
+    );
   }
 }
