@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:expmanager/switch.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui show Image;
@@ -56,6 +54,7 @@ class _LoginState extends ConsumerState<Login> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: todo
     // TODO: implement build
     return SingleChildScrollView(
       child: Center(
@@ -63,7 +62,7 @@ class _LoginState extends ConsumerState<Login> {
           children: [
             const Padding(
                 padding: EdgeInsets.fromLTRB(0, 120, 0, 20),
-                child: Image(image: AssetImage('assets/images/deepcloud.png'))),
+                child: Image(image: AssetImage('assets/images/deep1.png'),height: 100, width:100)),
             Form(
               key: _formKey,
               autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -107,7 +106,7 @@ class _LoginState extends ConsumerState<Login> {
                           borderRadius:
                               BorderRadius.circular(12), // Apply corner radius
                         ),
-                        prefixIcon: Icon(Icons.lock_rounded, size: 24),
+                        prefixIcon: const Icon(Icons.lock_rounded, size: 24),
                         suffixIcon: Padding(
                           padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           child: GestureDetector(
@@ -171,12 +170,12 @@ class _LoginState extends ConsumerState<Login> {
                         MediaQuery.of(context).size.height * 0.5),
                     painter: CurvedPainter(),
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                      child: Container(
-                        child: const Image(
-                            image: AssetImage('assets/images/ff.png')),
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      child: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height * 0.5,
+                        child: const Image(
+                            image: AssetImage('assets/images/ff.png')),
                       ),
                     ),
                   ),
