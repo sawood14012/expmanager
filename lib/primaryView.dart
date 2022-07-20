@@ -63,14 +63,14 @@ class _PrimaryState extends ConsumerState<Primary> {
                       fontSize: 30),
                 ),
               ),
-        Form(
+        SingleChildScrollView(
+          child: Form(
         key: _formKey,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 10),
               const Text("Company",
                   textAlign: TextAlign.start,
                   style: TextStyle(
@@ -263,6 +263,7 @@ class _PrimaryState extends ConsumerState<Primary> {
           ),
         ),
       ),
+     )
       ])
     );
   }
