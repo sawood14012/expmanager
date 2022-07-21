@@ -55,9 +55,11 @@ class _HomeState extends ConsumerState<Home> {
           ref.read(RouteStateProvider.state).state = i!;
         },
       ),
-      body: Center(
-        child: screens[routeIndex]
+      
+      body: SingleChildScrollView(
+      child: Center(
+        child: screens[routeIndex],
       ),
-    );
+    ));
   }
 }
