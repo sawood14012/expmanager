@@ -220,6 +220,7 @@ class _PrimaryState extends ConsumerState<Primary> {
                       onPressed: () async {
                         photo = await _picker.pickImage(source: ImageSource.camera);
                       },
+                      
                       child: const Icon(
                         Icons.camera_alt_rounded,
                         size: 35,
