@@ -23,8 +23,8 @@ class _HistoryState extends ConsumerState<History> {
         const SizedBox(
           height: 10.0,
         ),
-        Row(
-          children: const [
+        const Row(
+          children: [
             Padding(
               padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
               child: Text(

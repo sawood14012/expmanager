@@ -1,8 +1,6 @@
-import 'dart:io';
 
 import 'package:expmanager/switch.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui' as ui show Image;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

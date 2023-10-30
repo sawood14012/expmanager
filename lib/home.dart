@@ -1,7 +1,6 @@
 import 'package:expmanager/historyView.dart';
 import 'package:expmanager/primaryView.dart';
 import 'package:expmanager/profileView.dart';
-import 'package:expmanager/switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
